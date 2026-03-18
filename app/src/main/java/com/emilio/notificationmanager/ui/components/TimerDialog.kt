@@ -5,8 +5,10 @@ import androidx.compose.material3.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.emilio.notificationmanager.R
 
 @Composable
 fun TimerDialog(
@@ -25,7 +27,7 @@ fun TimerDialog(
         title = { Text(title) },
         text = {
             Column {
-                Text("¿Para cuánto tiempo es esta regla?")
+                Text(stringResource(R.string.timer_question))
                 Spacer(modifier = Modifier.height(16.dp))
                 
                 Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -36,7 +38,7 @@ fun TimerDialog(
                                 hoursText = it 
                             }
                         },
-                        label = { Text("Horas") },
+                        label = { Text(stringResource(R.string.label_hours)) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                         modifier = Modifier.weight(1f),
                         singleLine = true
@@ -48,7 +50,7 @@ fun TimerDialog(
                                 minutesText = it 
                             }
                         },
-                        label = { Text("Min") },
+                        label = { Text(stringResource(R.string.label_minutes)) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                         modifier = Modifier.weight(1f),
                         singleLine = true
@@ -68,7 +70,7 @@ fun TimerDialog(
                         modifier = Modifier.weight(1f),
                         enabled = canSubmit
                     ) {
-                        Text("Silenciar")
+                        Text(stringResource(R.string.btn_silence))
                     }
                     Button(
                         onClick = { onBlockSet(totalMs) }, 
@@ -76,21 +78,21 @@ fun TimerDialog(
                         enabled = canSubmit,
                         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
                     ) {
-                        Text("Bloquear")
+                        Text(stringResource(R.string.btn_block))
                     }
                 }
 
                 if (showReset) {
                     Spacer(modifier = Modifier.height(16.dp))
                     OutlinedButton(onClick = onReset, modifier = Modifier.fillMaxWidth()) {
-                        Text("Desactivar reglas")
+                        Text(stringResource(R.string.btn_deactivate_rules))
                     }
                 }
             }
         },
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text("Cancelar")
+                Text(stringResource(R.string.btn_cancel))
             }
         }
     )

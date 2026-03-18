@@ -38,6 +38,11 @@ enum class ThemePreference {
     SYSTEM, LIGHT, DARK
 }
 
+/* Available languages for the app */
+enum class LanguagePreference {
+    SYSTEM, ES, EN, FR, PT
+}
+
 /* Main class that handles writing and reading logic to the device SharedPreferences */
 class AppPreferences(context: Context) {
     private val prefs: SharedPreferences = context.getSharedPreferences("block_prefs", Context.MODE_PRIVATE)
@@ -55,6 +60,21 @@ class AppPreferences(context: Context) {
             ThemePreference.valueOf(themeStr ?: ThemePreference.SYSTEM.name)
         } catch (e: Exception) {
             ThemePreference.SYSTEM
+        }
+    }
+
+    // 1b. Language Preference Logic
+    fun setLanguagePreference(lang: LanguagePreference) {
+        prefs.edit().putString("language_pref", lang.name).apply()
+    }
+
+    /* Function that returns the current language preference, defaulting to SYSTEM */
+    fun getLanguagePreference(): LanguagePreference {
+        val langStr = prefs.getString("language_pref", LanguagePreference.SYSTEM.name)
+        return try {
+            LanguagePreference.valueOf(langStr ?: LanguagePreference.SYSTEM.name)
+        } catch (e: Exception) {
+            LanguagePreference.SYSTEM
         }
     }
 

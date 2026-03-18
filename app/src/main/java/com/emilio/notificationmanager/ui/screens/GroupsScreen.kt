@@ -17,9 +17,11 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.emilio.notificationmanager.AppInfo
+import com.emilio.notificationmanager.R
 import com.emilio.notificationmanager.data.AppPreferences
 import com.emilio.notificationmanager.data.NotificationGroup
 import com.emilio.notificationmanager.ui.components.AppListItem
@@ -37,7 +39,7 @@ fun GroupsScreen(context: Context, appPreferences: AppPreferences) {
     var showCreateDialog by remember { mutableStateOf(false) }
     // Which group card is expanded to show its apps
     var expandedGroupId by remember { mutableStateOf<String?>(null) }
-    // Holds (group, packageName) when user taps Quitar — triggers a confirmation dialog
+    // Holds (group, packageName) when user taps Remove — triggers a confirmation dialog
     var appToRemoveFromGroup by remember { mutableStateOf<Pair<NotificationGroup, String>?>(null) }
 
     val refreshGroups = {
@@ -47,13 +49,13 @@ fun GroupsScreen(context: Context, appPreferences: AppPreferences) {
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = { showCreateDialog = true }) {
-                Icon(Icons.Default.Add, contentDescription = "Crear Grupo")
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.create_group))
             }
         }
     ) { padding ->
         if (groups.isEmpty()) {
             Box(modifier = Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
-                Text("No hay grupos creados", style = MaterialTheme.typography.bodyLarge)
+                Text(stringResource(R.string.no_groups), style = MaterialTheme.typography.bodyLarge)
             }
         } else {
             LazyColumn(
@@ -80,10 +82,10 @@ fun GroupsScreen(context: Context, appPreferences: AppPreferences) {
                                 Text(group.name, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
                                 Row {
                                     IconButton(onClick = { groupToEdit = group }) {
-                                        Icon(Icons.Default.Edit, contentDescription = "Editar")
+                                        Icon(Icons.Default.Edit, contentDescription = stringResource(R.string.btn_edit))
                                     }
                                     IconButton(onClick = { groupToDelete = group }) {
-                                        Icon(Icons.Default.Delete, contentDescription = "Borrar", tint = MaterialTheme.colorScheme.error)
+                                        Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.btn_delete), tint = MaterialTheme.colorScheme.error)
                                     }
                                 }
                             }
@@ -94,12 +96,12 @@ fun GroupsScreen(context: Context, appPreferences: AppPreferences) {
 
                             if (isBlocked) {
                                 val remainingMins = ((group.blockedUntil - System.currentTimeMillis()) / 60000).coerceAtLeast(1)
-                                Text("Bloqueado (${remainingMins} min restantes)", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+                                Text(stringResource(R.string.blocked_min_remaining, remainingMins), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
                             } else if (isSilenced) {
                                 val remainingMins = ((group.silencedUntil - System.currentTimeMillis()) / 60000).coerceAtLeast(1)
-                                Text("Silenciado (${remainingMins} min restantes)", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+                                Text(stringResource(R.string.silenced_min_remaining, remainingMins), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
                             } else {
-                                Text("${group.packageNames.size} aplicaciones · Toca para ver", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Text(stringResource(R.string.apps_tap_to_see, group.packageNames.size), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
 
                             // ---- Expanded app list ----
@@ -136,7 +138,7 @@ fun GroupsScreen(context: Context, appPreferences: AppPreferences) {
                                                 },
                                                 modifier = Modifier.padding(start = 4.dp)
                                             ) {
-                                                Text("Quitar")
+                                                Text(stringResource(R.string.btn_remove))
                                             }
                                         }
                                         HorizontalDivider(color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f))
@@ -150,7 +152,7 @@ fun GroupsScreen(context: Context, appPreferences: AppPreferences) {
                                 onClick = { selectedGroupForTimer = group },
                                 modifier = Modifier.fillMaxWidth()
                             ) {
-                                Text("Configurar Acciones")
+                                Text(stringResource(R.string.configure_actions))
                             }
                         }
                     }
@@ -163,12 +165,12 @@ fun GroupsScreen(context: Context, appPreferences: AppPreferences) {
         var groupName by remember { mutableStateOf("") }
         AlertDialog(
             onDismissRequest = { showCreateDialog = false },
-            title = { Text("Nuevo Grupo") },
+            title = { Text(stringResource(R.string.new_group)) },
             text = {
                 OutlinedTextField(
                     value = groupName,
                     onValueChange = { groupName = it },
-                    label = { Text("Nombre del grupo") },
+                    label = { Text(stringResource(R.string.group_name_label)) },
                     singleLine = true
                 )
             },
@@ -179,14 +181,14 @@ fun GroupsScreen(context: Context, appPreferences: AppPreferences) {
                         appPreferences.saveGroup(newGroup)
                         refreshGroups()
                         showCreateDialog = false
-                        groupToEdit = newGroup // Immediately edit to add apps
+                        groupToEdit = newGroup
                     }
                 }) {
-                    Text("Crear")
+                    Text(stringResource(R.string.btn_create))
                 }
             },
             dismissButton = {
-                TextButton(onClick = { showCreateDialog = false }) { Text("Cancelar") }
+                TextButton(onClick = { showCreateDialog = false }) { Text(stringResource(R.string.btn_cancel)) }
             }
         )
     }
@@ -207,8 +209,8 @@ fun GroupsScreen(context: Context, appPreferences: AppPreferences) {
     groupToDelete?.let { group ->
         AlertDialog(
             onDismissRequest = { groupToDelete = null },
-            title = { Text("Eliminar Grupo") },
-            text = { Text("¿Estás seguro de que deseas eliminar el grupo '${group.name}'? Esto no se puede deshacer.") },
+            title = { Text(stringResource(R.string.delete_group_title)) },
+            text = { Text(stringResource(R.string.delete_group_msg, group.name)) },
             confirmButton = {
                 Button(
                     onClick = {
@@ -218,12 +220,12 @@ fun GroupsScreen(context: Context, appPreferences: AppPreferences) {
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
                 ) {
-                    Text("Eliminar")
+                    Text(stringResource(R.string.btn_confirm_delete))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { groupToDelete = null }) {
-                    Text("Cancelar")
+                    Text(stringResource(R.string.btn_cancel))
                 }
             }
         )
@@ -238,8 +240,8 @@ fun GroupsScreen(context: Context, appPreferences: AppPreferences) {
         } catch (e: Exception) { pkg }
         AlertDialog(
             onDismissRequest = { appToRemoveFromGroup = null },
-            title = { Text("Quitar aplicación") },
-            text = { Text("¿Quitar '$appName' del grupo '${group.name}'?") },
+            title = { Text(stringResource(R.string.remove_app_title)) },
+            text = { Text(stringResource(R.string.remove_app_msg, appName, group.name)) },
             confirmButton = {
                 Button(
                     onClick = {
@@ -249,22 +251,22 @@ fun GroupsScreen(context: Context, appPreferences: AppPreferences) {
                         appToRemoveFromGroup = null
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
-                ) { Text("Quitar") }
+                ) { Text(stringResource(R.string.btn_remove)) }
             },
             dismissButton = {
-                TextButton(onClick = { appToRemoveFromGroup = null }) { Text("Cancelar") }
+                TextButton(onClick = { appToRemoveFromGroup = null }) { Text(stringResource(R.string.btn_cancel)) }
             }
         )
     }
 
     selectedGroupForTimer?.let { group ->
         TimerDialog(
-            title = "Configurar Grupo: ${group.name}",
+            title = stringResource(R.string.configure_group, group.name),
             onDismiss = { selectedGroupForTimer = null },
             onSilenceSet = { durationMs ->
                 val updatedGroup = group.copy(
                     silencedUntil = System.currentTimeMillis() + durationMs,
-                    blockedUntil = 0L // clear block if silencing
+                    blockedUntil = 0L
                 )
                 appPreferences.saveGroup(updatedGroup)
                 refreshGroups()
@@ -273,7 +275,7 @@ fun GroupsScreen(context: Context, appPreferences: AppPreferences) {
             onBlockSet = { durationMs ->
                 val updatedGroup = group.copy(
                     blockedUntil = System.currentTimeMillis() + durationMs,
-                    silencedUntil = 0L // clear silence if blocking
+                    silencedUntil = 0L
                 )
                 appPreferences.saveGroup(updatedGroup)
                 refreshGroups()
@@ -295,8 +297,6 @@ fun EditGroupDialog(context: Context, group: NotificationGroup, onDismiss: () ->
     var searchQuery by remember { mutableStateOf("") }
     var apps by remember { mutableStateOf<List<AppInfo>>(emptyList()) }
     var editedName by remember { mutableStateOf(group.name) }
-    // Use an immutable Set with mutableStateOf so each toggle creates a new object,
-    // which guarantees Compose detects the change and redraws the Checkbox.
     var selectedPackages by remember { mutableStateOf(group.packageNames.toSet()) }
 
     // Load Apps asynchronously on IO to avoid blocking UI thread
@@ -332,7 +332,7 @@ fun EditGroupDialog(context: Context, group: NotificationGroup, onDismiss: () ->
                 OutlinedTextField(
                     value = editedName,
                     onValueChange = { editedName = it },
-                    label = { Text("Nombre del grupo") },
+                    label = { Text(stringResource(R.string.group_name_label)) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp, vertical = 12.dp),
@@ -344,7 +344,7 @@ fun EditGroupDialog(context: Context, group: NotificationGroup, onDismiss: () ->
                     value = searchQuery,
                     onValueChange = { searchQuery = it },
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
-                    placeholder = { Text("Buscar aplicación...") },
+                    placeholder = { Text(stringResource(R.string.search_app)) },
                     leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search") },
                     singleLine = true
                 )
@@ -368,7 +368,7 @@ fun EditGroupDialog(context: Context, group: NotificationGroup, onDismiss: () ->
                         ) {
                             Checkbox(
                                 checked = isSelected,
-                                onCheckedChange = null // toggle handled by the Row clickable above
+                                onCheckedChange = null
                             )
                             // Show the app icon + name using AppListItem (no divider here)
                             AppListItem(
@@ -391,9 +391,9 @@ fun EditGroupDialog(context: Context, group: NotificationGroup, onDismiss: () ->
                     modifier = Modifier.fillMaxWidth().padding(16.dp),
                     horizontalArrangement = Arrangement.End
                 ) {
-                    TextButton(onClick = onDismiss) { Text("Cancelar") }
+                    TextButton(onClick = onDismiss) { Text(stringResource(R.string.btn_cancel)) }
                     Spacer(modifier = Modifier.width(8.dp))
-                    Button(onClick = { onSave(group.copy(name = editedName.ifBlank { group.name }, packageNames = selectedPackages)) }) { Text("Guardar") }
+                    Button(onClick = { onSave(group.copy(name = editedName.ifBlank { group.name }, packageNames = selectedPackages)) }) { Text(stringResource(R.string.btn_save)) }
                 }
             }
         }
