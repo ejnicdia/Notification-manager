@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Notification Manager</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Accueil</string>
+    <string name="nav_silenced">Silencieux</string>
+    <string name="nav_blocked">Bloqués</string>
+    <string name="nav_groups">Groupes</string>
+    <string name="nav_settings">Paramètres</string>
+    <string name="nav_triggers">Déclencheurs</string>
+    <string name="menu_options">Options</string>
+
+    <!-- Home Screen -->
+    <string name="search_app">Rechercher une app…</string>
+    <string name="status_blocked">Bloqué</string>
+    <string name="status_silenced">Silencieux</string>
+    <string name="configure_for">Configurer pour %1$s</string>
+
+    <!-- Timer Dialog -->
+    <string name="timer_question">Combien de temps pour cette règle ?</string>
+    <string name="label_hours">Heures</string>
+    <string name="label_minutes">Min</string>
+    <string name="btn_silence">Rendre silencieux</string>
+    <string name="btn_block">Bloquer</string>
+    <string name="btn_deactivate_rules">Désactiver les règles</string>
+    <string name="btn_cancel">Annuler</string>
+
+    <!-- Silenced Screen -->
+    <string name="no_silenced_apps">Aucune app ou groupe en mode silencieux</string>
+    <string name="silenced_groups_title">Groupes Silencieux</string>
+    <string name="silenced_individual_title">Apps Silencieuses (Individuel)</string>
+    <string name="remaining_min">%1$d apps • %2$d min restantes</string>
+    <string name="btn_remove">Retirer</string>
+
+    <!-- Blocked Screen -->
+    <string name="no_blocked_apps">Aucune app ou groupe bloqué</string>
+    <string name="blocked_groups_title">Groupes Bloqués</string>
+    <string name="blocked_individual_title">Apps Bloquées (Individuel)</string>
+    <string name="blocked_remaining_min">%1$d apps • %2$d min restantes</string>
+
+    <!-- Groups Screen -->
+    <string name="create_group">Créer un Groupe</string>
+    <string name="no_groups">Aucun groupe créé</string>
+    <string name="btn_edit">Modifier</string>
+    <string name="btn_delete">Supprimer</string>
+    <string name="blocked_min_remaining">Bloqué (%1$d min restantes)</string>
+    <string name="silenced_min_remaining">Silencieux (%1$d min restantes)</string>
+    <string name="apps_tap_to_see">%1$d apps · Appuyez pour voir</string>
+    <string name="configure_actions">Configurer les Actions</string>
+    <string name="new_group">Nouveau Groupe</string>
+    <string name="group_name_label">Nom du groupe</string>
+    <string name="btn_create">Créer</string>
+    <string name="delete_group_title">Supprimer le Groupe</string>
+    <string name="delete_group_msg">Voulez-vous vraiment supprimer le groupe \'%1$s\' ? Cette action est irréversible.</string>
+    <string name="btn_confirm_delete">Supprimer</string>
+    <string name="remove_app_title">Retirer l\'app</string>
+    <string name="remove_app_msg">Retirer \'%1$s\' du groupe \'%2$s\' ?</string>
+    <string name="configure_group">Configurer le Groupe : %1$s</string>
+    <string name="btn_save">Enregistrer</string>
+
+    <!-- Triggers Screen -->
+    <string name="new_trigger">Nouveau Déclencheur</string>
+    <string name="no_triggers">Aucun déclencheur créé.</string>
+    <string name="trigger_type_label">Type : %1$s</string>
+    <string name="trigger_action_label">Action : %1$s</string>
+    <string name="trigger_time_label">Temps : %1$d minutes</string>
+    <string name="trigger_activated">Déclencheur temporel \'%1$s\' activé</string>
+    <string name="btn_activate">Activer</string>
+    <string name="affects_label">Affecte :</string>
+    <string name="groups_colon">Groupes : %1$s</string>
+    <string name="apps_colon">Apps : %1$s</string>
+    <string name="delete_trigger_title">Supprimer le Déclencheur</string>
+    <string name="delete_trigger_msg">Voulez-vous vraiment supprimer le déclencheur \'%1$s\' ? Cette action est irréversible.</string>
+
+    <!-- Trigger Wizard -->
+    <string name="wizard_header">Configurer le Déclencheur (Étape %1$d/4)</string>
+    <string name="step0_prompt">Donnez un nom à ce déclencheur :</string>
+    <string name="step0_label">Nom (max 50 car.)</string>
+    <string name="step1_prompt">Sélectionnez les apps et/ou groupes concernés :</string>
+    <string name="tab_apps">Apps</string>
+    <string name="tab_groups">Groupes</string>
+    <string name="step2_prompt">Comment doit-il s\'activer ?</string>
+    <string name="type_temporal">Programmé (à une heure précise)</string>
+    <string name="type_notification">Par Notification (mot-clé)</string>
+    <string name="label_hour_range">Heure (0-23)</string>
+    <string name="label_minute_range">Minute (0-59)</string>
+    <string name="label_keyword">Mot-clé requis</string>
+    <string name="step3_prompt">Définir l\'action et la durée :</string>
+    <string name="action_silence">Rendre silencieux</string>
+    <string name="action_block">Bloquer</string>
+    <string name="label_duration_min">Durée (minutes)</string>
+    <string name="btn_back">← Retour</string>
+    <string name="btn_next">Suivant →</string>
+    <string name="btn_confirm">Confirmer</string>
+
+    <!-- Settings Screen -->
+    <string name="theme_title">Thème de l\'application</string>
+    <string name="theme_system">Thème Système</string>
+    <string name="theme_light">Thème Clair (Blanc et Orange)</string>
+    <string name="theme_dark">Thème Sombre (Noir et Bleu)</string>
+    <string name="language_title">Langue</string>
+    <string name="lang_system">Par défaut du système</string>
+    <string name="lang_es">Español (Castellano)</string>
+    <string name="lang_en">English</string>
+    <string name="lang_fr">Français</string>
+    <string name="lang_pt">Português</string>
+    <string name="app_info_title">Informations sur l\'application</string>
+    <string name="version_label">Version : %1$s</string>
+    <string name="unknown_version">Inconnue</string>
+
+    <!-- Permission Screen -->
+    <string name="permission_needed">L\'accès aux notifications est requis pour les bloquer.</string>
+    <string name="btn_grant_permission">Accorder la Permission</string>
+    <string name="notification_warning">Les notifications de l\'app sont bloquées. Le mode silencieux ne fonctionnera pas.</string>
+    <string name="btn_enable">Activer</string>
+
+    <!-- Persistent Notification (Service) -->
+    <string name="persistent_title">Notification Manager Actif</string>
+    <string name="persistent_text">Il y a %1$d apps/groupes avec des règles appliquées.</string>
+    <string name="btn_deactivate_all">Tout désactiver</string>
+</resources>

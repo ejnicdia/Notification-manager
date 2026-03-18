@@ -12,8 +12,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.emilio.notificationmanager.AppInfo
+import com.emilio.notificationmanager.R
 import com.emilio.notificationmanager.data.AppPreferences
 import com.emilio.notificationmanager.ui.components.AppListItem
 import kotlinx.coroutines.delay
@@ -54,7 +56,7 @@ fun SilencedScreen(context: Context, appPreferences: AppPreferences) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Icon(Icons.Default.NotificationsOff, contentDescription = null, modifier = Modifier.size(64.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant)
                 Spacer(modifier = Modifier.height(16.dp))
-                Text("No hay aplicaciones ni grupos silenciados", style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(stringResource(R.string.no_silenced_apps), style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
         return
@@ -66,7 +68,7 @@ fun SilencedScreen(context: Context, appPreferences: AppPreferences) {
     ) {
         if (silencedGroups.isNotEmpty()) {
             item {
-                Text("Grupos Silenciados", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(bottom = 8.dp))
+                Text(stringResource(R.string.silenced_groups_title), style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(bottom = 8.dp))
             }
             items(silencedGroups) { group ->
                 Card(modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)) {
@@ -78,14 +80,14 @@ fun SilencedScreen(context: Context, appPreferences: AppPreferences) {
                         Column {
                             Text(group.name, style = MaterialTheme.typography.bodyLarge)
                             val remainingMins = ((group.silencedUntil - System.currentTimeMillis()) / 60000).coerceAtLeast(1)
-                            Text("${group.packageNames.size} apps • ${remainingMins} min restantes", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+                            Text(stringResource(R.string.remaining_min, group.packageNames.size, remainingMins), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
                         }
                         OutlinedButton(onClick = {
                             val newGroup = group.copy(silencedUntil = 0L)
                             appPreferences.saveGroup(newGroup)
                             refreshTrigger++
                         }) {
-                            Text("Quitar")
+                            Text(stringResource(R.string.btn_remove))
                         }
                     }
                 }
@@ -95,7 +97,7 @@ fun SilencedScreen(context: Context, appPreferences: AppPreferences) {
 
         if (silencedIndividuals.isNotEmpty()) {
             item {
-                Text("Aplicaciones Silenciadas (Individual)", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(bottom = 8.dp))
+                Text(stringResource(R.string.silenced_individual_title), style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(bottom = 8.dp))
             }
             items(silencedIndividuals) { pkg ->
                 val appInfo = try {
@@ -113,14 +115,14 @@ fun SilencedScreen(context: Context, appPreferences: AppPreferences) {
                         AppListItem(
                             app = appInfo,
                             isBlocked = true,
-                            actionText = "Silenciado",
+                            actionText = stringResource(R.string.status_silenced),
                             expirationTime = silencedUntil,
                             rightContent = {
                                 OutlinedButton(onClick = {
                                     appPreferences.unblockAndUnsilenceApp(pkg)
                                     refreshTrigger++
                                 }) {
-                                    Text("Quitar")
+                                    Text(stringResource(R.string.btn_remove))
                                 }
                             },
                             onClick = {}

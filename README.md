@@ -19,6 +19,12 @@ The entire UI is built with **Jetpack Compose** and follows Material 3 design gu
 
 ## Version History
 
+### V1.7 – Multi-Language Support
+- Added language selector in Settings (Spanish, English, French, Portuguese).
+- Default language follows the device system locale, falling back to English.
+- Extracted all hardcoded strings to Android string resources for proper localization.
+- The app fully updates to the selected language immediately.
+
 ### V1.6 – Background Execution & Triggers V2
 - Persistent notification while timers are active ("Notification Manager Active") with a "Deactivate all" button.
 - Timer dialog redesigned: custom hour (0-23) and minute (0-59) input fields instead of fixed time buttons.
@@ -68,6 +74,6 @@ The entire UI is built with **Jetpack Compose** and follows Material 3 design gu
 
 You can download the latest APK directly from the repository:
 
-**[Download Notification-manager-V1.6](https://github.com/ejnicdia/Notification-manager/blob/main/app/build/outputs/apk/debug/app-debug.apk)**
+**[Download Notification-manager-V1.7](https://github.com/ejnicdia/Notification-manager/blob/main/app/build/outputs/apk/debug/app-debug.apk)**
 
 > To install the APK on your device, you may need to enable "Install from unknown sources" in your Android settings.

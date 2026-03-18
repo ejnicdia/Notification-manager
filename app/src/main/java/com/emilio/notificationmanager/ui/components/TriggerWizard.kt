@@ -13,11 +13,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.emilio.notificationmanager.AppInfo
+import com.emilio.notificationmanager.R
 import com.emilio.notificationmanager.data.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -72,7 +74,7 @@ fun TriggerWizard(
             Column(modifier = Modifier.fillMaxSize()) {
                 // Header
                 Text(
-                    text = "Configurar Trigger (Paso ${step + 1}/4)",
+                    text = stringResource(R.string.wizard_header, step + 1),
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.padding(16.dp)
                 )
@@ -103,7 +105,7 @@ fun TriggerWizard(
                     TextButton(onClick = {
                         if (step > 0) step-- else onDismiss()
                     }) {
-                        Text(if (step == 0) "Cancelar" else "← Atrás")
+                        Text(if (step == 0) stringResource(R.string.btn_cancel) else stringResource(R.string.btn_back))
                     }
                     
                     Button(
@@ -130,7 +132,7 @@ fun TriggerWizard(
                         },
                         enabled = canGoNext
                     ) {
-                        Text(if (step < 3) "Siguiente →" else "Confirmar")
+                        Text(if (step < 3) stringResource(R.string.btn_next) else stringResource(R.string.btn_confirm))
                     }
                 }
             }
@@ -141,12 +143,12 @@ fun TriggerWizard(
 @Composable
 fun Step0Name(name: String, onNameChange: (String) -> Unit) {
     Column {
-        Text("Ponle un nombre a este Trigger:")
+        Text(stringResource(R.string.step0_prompt))
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(
             value = name,
             onValueChange = { if (it.length <= 50) onNameChange(it) },
-            label = { Text("Nombre (máx 50 char)") },
+            label = { Text(stringResource(R.string.step0_label)) },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true
         )
@@ -189,12 +191,12 @@ fun Step1AppsGroups(
     val filteredApps = if (searchQuery.isBlank()) { apps } else { apps.filter { it.name.contains(searchQuery, ignoreCase = true) } }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        Text("Selecciona aplicaciones y/o grupos afectados:", style = MaterialTheme.typography.labelLarge)
+        Text(stringResource(R.string.step1_prompt), style = MaterialTheme.typography.labelLarge)
         Spacer(modifier = Modifier.height(8.dp))
         
         TabRow(selectedTabIndex = selectedTab) {
-            Tab(selected = selectedTab == 0, onClick = { selectedTab = 0 }, text = { Text("Aplicaciones") })
-            Tab(selected = selectedTab == 1, onClick = { selectedTab = 1 }, text = { Text("Grupos") })
+            Tab(selected = selectedTab == 0, onClick = { selectedTab = 0 }, text = { Text(stringResource(R.string.tab_apps)) })
+            Tab(selected = selectedTab == 1, onClick = { selectedTab = 1 }, text = { Text(stringResource(R.string.tab_groups)) })
         }
         Spacer(modifier = Modifier.height(16.dp))
         
@@ -203,8 +205,8 @@ fun Step1AppsGroups(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("Buscar aplicación...") },
-                leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Buscar") },
+                placeholder = { Text(stringResource(R.string.search_app)) },
+                leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search") },
                 singleLine = true
             )
 
@@ -227,7 +229,7 @@ fun Step1AppsGroups(
         } else {
             if (groups.isEmpty()) {
                 Box(modifier = Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {
-                    Text("No hay grupos creados.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(stringResource(R.string.no_groups), color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             } else {
                 LazyColumn(modifier = Modifier.weight(1f)) {
@@ -264,12 +266,12 @@ fun Step2Type(
     onKeywordChange: (String) -> Unit
 ) {
     Column {
-        Text("¿Cómo quieres que se active?", style = MaterialTheme.typography.labelLarge)
+        Text(stringResource(R.string.step2_prompt), style = MaterialTheme.typography.labelLarge)
         Spacer(modifier = Modifier.height(16.dp))
         
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().clickable { onTypeChange(TriggerType.TEMPORAL) }) {
             RadioButton(selected = type == TriggerType.TEMPORAL, onClick = null)
-            Text("Programado (a una hora exacta)", modifier = Modifier.padding(start = 8.dp))
+            Text(stringResource(R.string.type_temporal), modifier = Modifier.padding(start = 8.dp))
         }
         
         if (type == TriggerType.TEMPORAL) {
@@ -281,7 +283,7 @@ fun Step2Type(
                             onHourChange(it)
                         }
                     },
-                    label = { Text("Hora (0-23)") },
+                    label = { Text(stringResource(R.string.label_hour_range)) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     modifier = Modifier.weight(1f),
                     singleLine = true
@@ -293,7 +295,7 @@ fun Step2Type(
                             onMinuteChange(it)
                         }
                     },
-                    label = { Text("Minuto (0-59)") },
+                    label = { Text(stringResource(R.string.label_minute_range)) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     modifier = Modifier.weight(1f),
                     singleLine = true
@@ -305,14 +307,14 @@ fun Step2Type(
         
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().clickable { onTypeChange(TriggerType.POR_NOTIFICACION) }) {
             RadioButton(selected = type == TriggerType.POR_NOTIFICACION, onClick = null)
-            Text("Por Notificación (palabra clave)", modifier = Modifier.padding(start = 8.dp))
+            Text(stringResource(R.string.type_notification), modifier = Modifier.padding(start = 8.dp))
         }
 
         if (type == TriggerType.POR_NOTIFICACION) {
             OutlinedTextField(
                 value = keyword,
                 onValueChange = onKeywordChange,
-                label = { Text("Palabra clave requerida") },
+                label = { Text(stringResource(R.string.label_keyword)) },
                 modifier = Modifier.fillMaxWidth().padding(start = 40.dp, top = 8.dp),
                 singleLine = true
             )
@@ -323,24 +325,24 @@ fun Step2Type(
 @Composable
 fun Step3ActionTime(action: TriggerAction, onActionChange: (TriggerAction) -> Unit, timeInput: String, onTimeChange: (String) -> Unit) {
     Column {
-        Text("Definir acción y duración:", style = MaterialTheme.typography.labelLarge)
+        Text(stringResource(R.string.step3_prompt), style = MaterialTheme.typography.labelLarge)
         Spacer(modifier = Modifier.height(16.dp))
         
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().clickable { onActionChange(TriggerAction.SILENCE) }) {
             RadioButton(selected = action == TriggerAction.SILENCE, onClick = null)
-            Text("Silenciar", modifier = Modifier.padding(start = 8.dp))
+            Text(stringResource(R.string.action_silence), modifier = Modifier.padding(start = 8.dp))
         }
         Spacer(modifier = Modifier.height(8.dp))
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().clickable { onActionChange(TriggerAction.BLOCK) }) {
             RadioButton(selected = action == TriggerAction.BLOCK, onClick = null)
-            Text("Bloquear", modifier = Modifier.padding(start = 8.dp))
+            Text(stringResource(R.string.action_block), modifier = Modifier.padding(start = 8.dp))
         }
         
         Spacer(modifier = Modifier.height(32.dp))
         OutlinedTextField(
             value = timeInput,
             onValueChange = { if (it.all { char -> char.isDigit() }) onTimeChange(it) },
-            label = { Text("Duración (minutos)") },
+            label = { Text(stringResource(R.string.label_duration_min)) },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true
         )

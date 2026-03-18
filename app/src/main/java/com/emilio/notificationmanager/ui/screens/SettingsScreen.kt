@@ -7,31 +7,42 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.emilio.notificationmanager.R
 import com.emilio.notificationmanager.data.AppPreferences
+import com.emilio.notificationmanager.data.LanguagePreference
 import com.emilio.notificationmanager.data.ThemePreference
 
+/* Settings screen with theme, language, and app info sections */
 @Composable
-fun SettingsScreen(context: Context, appPreferences: AppPreferences, onThemeChange: (ThemePreference) -> Unit) {
+fun SettingsScreen(
+    context: Context,
+    appPreferences: AppPreferences,
+    onThemeChange: (ThemePreference) -> Unit,
+    onLanguageChange: () -> Unit
+) {
     var selectedTheme by remember { mutableStateOf(appPreferences.getThemePreference()) }
-    
+    var selectedLanguage by remember { mutableStateOf(appPreferences.getLanguagePreference()) }
+
     val packageInfo = try {
         context.packageManager.getPackageInfo(context.packageName, 0)
     } catch (e: Exception) {
         null
     }
-    val versionName = packageInfo?.versionName ?: "Desconocida"
+    val versionName = packageInfo?.versionName ?: stringResource(R.string.unknown_version)
 
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp)
     ) {
-        Text("Tema de la aplicación", style = MaterialTheme.typography.titleLarge)
+        // 1. Theme section
+        Text(stringResource(R.string.theme_title), style = MaterialTheme.typography.titleLarge)
         Spacer(modifier = Modifier.height(16.dp))
 
         val themeOptions = listOf(
-            ThemePreference.SYSTEM to "Tema del Sistema",
-            ThemePreference.LIGHT to "Tema Claro (Blanco y Naranja)",
-            ThemePreference.DARK to "Tema Oscuro (Negro y Azul)"
+            ThemePreference.SYSTEM to stringResource(R.string.theme_system),
+            ThemePreference.LIGHT to stringResource(R.string.theme_light),
+            ThemePreference.DARK to stringResource(R.string.theme_dark)
         )
 
         themeOptions.forEach { (theme, label) ->
@@ -57,8 +68,44 @@ fun SettingsScreen(context: Context, appPreferences: AppPreferences, onThemeChan
 
         HorizontalDivider(modifier = Modifier.padding(vertical = 24.dp), color = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f))
 
-        Text("Información de la aplicación", style = MaterialTheme.typography.titleLarge)
+        // 2. Language section
+        Text(stringResource(R.string.language_title), style = MaterialTheme.typography.titleLarge)
         Spacer(modifier = Modifier.height(16.dp))
-        Text("Versión: $versionName", style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+
+        val languageOptions = listOf(
+            LanguagePreference.SYSTEM to stringResource(R.string.lang_system),
+            LanguagePreference.ES to stringResource(R.string.lang_es),
+            LanguagePreference.EN to stringResource(R.string.lang_en),
+            LanguagePreference.FR to stringResource(R.string.lang_fr),
+            LanguagePreference.PT to stringResource(R.string.lang_pt)
+        )
+
+        languageOptions.forEach { (lang, label) ->
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        selectedLanguage = lang
+                        appPreferences.setLanguagePreference(lang)
+                        onLanguageChange()
+                    }
+                    .padding(vertical = 12.dp, horizontal = 8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                RadioButton(
+                    selected = selectedLanguage == lang,
+                    onClick = null // handled by Row
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(text = label, style = MaterialTheme.typography.bodyLarge)
+            }
+        }
+
+        HorizontalDivider(modifier = Modifier.padding(vertical = 24.dp), color = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f))
+
+        // 3. App info section
+        Text(stringResource(R.string.app_info_title), style = MaterialTheme.typography.titleLarge)
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(stringResource(R.string.version_label, versionName), style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }

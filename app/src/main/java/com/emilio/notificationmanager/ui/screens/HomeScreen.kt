@@ -11,8 +11,10 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.emilio.notificationmanager.AppInfo
+import com.emilio.notificationmanager.R
 import com.emilio.notificationmanager.ui.components.TimerDialog
 import com.emilio.notificationmanager.data.AppPreferences
 import com.emilio.notificationmanager.ui.components.AppListItem
@@ -55,6 +57,9 @@ fun HomeScreen(context: Context, appPreferences: AppPreferences) {
         apps.filter { it.name.contains(searchQuery, ignoreCase = true) }
     }
 
+    val blockedLabel = stringResource(R.string.status_blocked)
+    val silencedLabel = stringResource(R.string.status_silenced)
+
     Column(modifier = Modifier.fillMaxSize()) {
         OutlinedTextField(
             value = searchQuery,
@@ -62,7 +67,7 @@ fun HomeScreen(context: Context, appPreferences: AppPreferences) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            placeholder = { Text("Buscar aplicación...") },
+            placeholder = { Text(stringResource(R.string.search_app)) },
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search") },
             singleLine = true
         )
@@ -77,8 +82,8 @@ fun HomeScreen(context: Context, appPreferences: AppPreferences) {
                     else -> 0L
                 }
                 val actionText = when {
-                    isBlockedLocally -> "Bloqueado"
-                    isSilencedLocally -> "Silenciado"
+                    isBlockedLocally -> blockedLabel
+                    isSilencedLocally -> silencedLabel
                     else -> ""
                 }
                 
@@ -99,7 +104,7 @@ fun HomeScreen(context: Context, appPreferences: AppPreferences) {
     if (showDialog) {
         selectedApp?.let { app ->
             TimerDialog(
-                title = "Configurar para ${selectedApp?.name}",
+                title = stringResource(R.string.configure_for, selectedApp?.name ?: ""),
                 onDismiss = { showDialog = false },
                 onSilenceSet = { durationMs ->
                     selectedApp?.let { app ->
