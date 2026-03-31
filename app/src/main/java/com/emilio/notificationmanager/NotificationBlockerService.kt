@@ -112,11 +112,11 @@ class NotificationBlockerService : NotificationListenerService() {
 
         val builder = NotificationCompat.Builder(this, PERSISTENT_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle("Notification Manager Active")
-            .setContentText("There are $activeCount apps/groups with applied rules.")
+            .setContentTitle(getString(R.string.persistent_title))
+            .setContentText(getString(R.string.persistent_text, activeCount))
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setOngoing(true)
-            .addAction(0, "Deactivate all", pendingIntent)
+            .addAction(0, getString(R.string.btn_deactivate_all), pendingIntent)
 
         notificationManager.notify(PERSISTENT_NOTIFICATION_ID, builder.build())
     }
@@ -182,6 +182,7 @@ class NotificationBlockerService : NotificationListenerService() {
     }
 
     /* Create the silent notification channel where we repost muted notifications */
+    private fun createSilentChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 SILENT_CHANNEL_ID,
@@ -206,7 +207,7 @@ class NotificationBlockerService : NotificationListenerService() {
         // 1. Prepare values to search for keyword triggers
         val notificationText = sbn.notification.extras?.getCharSequence(Notification.EXTRA_TEXT)?.toString() ?: ""
         val notificationTitle = sbn.notification.extras?.getCharSequence(Notification.EXTRA_TITLE)?.toString() ?: ""
-        val fullContent = "$notificationTitle $notificationText".lowercase()
+        val fullContent = "$notificationTitle $notificationText"
 
         // 2. Process active Notification triggers
         val currentTime = System.currentTimeMillis()
@@ -218,7 +219,20 @@ class NotificationBlockerService : NotificationListenerService() {
                     appPreferences.getGroups().find { it.id == groupId }?.packageNames?.contains(packageName) == true
                 }
                 // 3. Match keyword if one is defined in the trigger
-                val keywordMatched = trigger.keyword.isNullOrBlank() || fullContent.contains(trigger.keyword!!.lowercase())
+                val keywordMatched = if (trigger.keyword.isNullOrBlank()) {
+                    true
+                } else {
+                    val kw = trigger.keyword!!
+                    val textToSearch = if (trigger.caseSensitive) fullContent else fullContent.lowercase()
+                    val searchKw = if (trigger.caseSensitive) kw else kw.lowercase()
+
+                    if (trigger.exactWord) {
+                        val regex = Regex("\\b${Regex.escape(searchKw)}\\b")
+                        regex.containsMatchIn(textToSearch)
+                    } else {
+                        textToSearch.contains(searchKw)
+                    }
+                }
                 
                 if ((appInTrigger || inGroup) && keywordMatched) {
                     // 4. Activate this trigger and calculate expiration time

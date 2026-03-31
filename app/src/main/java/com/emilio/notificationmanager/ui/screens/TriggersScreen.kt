@@ -77,52 +77,25 @@ fun TriggersScreen(context: Context, appPreferences: AppPreferences) {
                                         style = MaterialTheme.typography.titleMedium,
                                         fontWeight = FontWeight.Bold
                                     )
+                                    val typeStr = if (trigger.triggerType == com.emilio.notificationmanager.data.TriggerType.TEMPORAL) stringResource(R.string.trigger_type_temporal) else stringResource(R.string.trigger_type_notification)
+                                    val actionStr = if (trigger.action == com.emilio.notificationmanager.data.TriggerAction.SILENCE) stringResource(R.string.trigger_action_silence) else stringResource(R.string.trigger_action_block)
+                                    val conditionStr = if (trigger.triggerType == com.emilio.notificationmanager.data.TriggerType.TEMPORAL) {
+                                        stringResource(R.string.trigger_condition_time, trigger.targetHour ?: 0, trigger.targetMinute ?: 0)
+                                    } else {
+                                        stringResource(R.string.trigger_condition_keyword, trigger.keyword ?: "")
+                                    }
+
                                     Spacer(modifier = Modifier.height(4.dp))
                                     Text(
-                                        text = stringResource(R.string.trigger_type_label, trigger.triggerType.name) + "\n" +
-                                               stringResource(R.string.trigger_action_label, trigger.action.name) + "\n" +
+                                        text = stringResource(R.string.trigger_type_label, typeStr) + "\n" +
+                                               conditionStr + "\n" +
+                                               stringResource(R.string.trigger_action_label, actionStr) + "\n" +
                                                stringResource(R.string.trigger_time_label, trigger.durationMs / 60000),
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
                                 }
                                 Row {
-                                    if (trigger.triggerType == com.emilio.notificationmanager.data.TriggerType.TEMPORAL) {
-                                        val activatedMsg = stringResource(R.string.trigger_activated, trigger.name)
-                                        IconButton(onClick = {
-                                            val expirationTime = System.currentTimeMillis() + trigger.durationMs
-                                            
-                                            // 1. Apply to specific packages
-                                            trigger.packageNames.forEach { pkg ->
-                                                if (trigger.action == com.emilio.notificationmanager.data.TriggerAction.BLOCK) {
-                                                    appPreferences.blockAppUntil(pkg, expirationTime)
-                                                    appPreferences.silenceAppUntil(pkg, 0L)
-                                                } else {
-                                                    appPreferences.silenceAppUntil(pkg, expirationTime)
-                                                    appPreferences.blockAppUntil(pkg, 0L)
-                                                }
-                                            }
-                                            
-                                            // 2. Apply to groups
-                                            val currentGroups = appPreferences.getGroups()
-                                            trigger.groupIds.forEach { groupId ->
-                                                currentGroups.find { it.id == groupId }?.let { group ->
-                                                    val updated = if (trigger.action == com.emilio.notificationmanager.data.TriggerAction.BLOCK) {
-                                                        group.copy(blockedUntil = expirationTime, silencedUntil = 0L)
-                                                    } else {
-                                                        group.copy(silencedUntil = expirationTime, blockedUntil = 0L)
-                                                    }
-                                                    appPreferences.saveGroup(updated)
-                                                }
-                                            }
-                                            
-                                            coroutineScope.launch {
-                                                snackbarHostState.showSnackbar(activatedMsg)
-                                            }
-                                        }) {
-                                            Icon(Icons.Default.PlayArrow, contentDescription = stringResource(R.string.btn_activate), tint = MaterialTheme.colorScheme.primary)
-                                        }
-                                    }
                                     IconButton(onClick = { triggerToEdit = trigger }) {
                                         Icon(Icons.Default.Edit, contentDescription = stringResource(R.string.btn_edit))
                                     }

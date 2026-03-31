@@ -29,14 +29,14 @@
     <!-- Silenced Screen -->
     <string name="no_silenced_apps">No silenced apps or groups</string>
     <string name="silenced_groups_title">Silenced Groups</string>
-    <string name="silenced_individual_title">Silenced Apps (Individual)</string>
+    <string name="silenced_individual_title">Silenced Apps</string>
     <string name="remaining_min">%1$d apps • %2$d min remaining</string>
     <string name="btn_remove">Remove</string>
 
     <!-- Blocked Screen -->
     <string name="no_blocked_apps">No blocked apps or groups</string>
     <string name="blocked_groups_title">Blocked Groups</string>
-    <string name="blocked_individual_title">Blocked Apps (Individual)</string>
+    <string name="blocked_individual_title">Blocked Apps</string>
     <string name="blocked_remaining_min">%1$d apps • %2$d min remaining</string>
 
     <!-- Groups Screen -->
@@ -64,8 +64,16 @@
     <string name="no_triggers">No triggers created yet.</string>
     <string name="trigger_type_label">Type: %1$s</string>
     <string name="trigger_action_label">Action: %1$s</string>
-    <string name="trigger_time_label">Time: %1$d minutes</string>
+    <string name="trigger_time_label">Duration: %1$d minutes</string>
+    <string name="trigger_condition_time">Condition: At %1$02d:%2$02d</string>
+    <string name="trigger_condition_keyword">Condition: Keyword \'%1$s\'</string>
+    <string name="trigger_type_temporal">Scheduled</string>
+    <string name="trigger_type_notification">By Notification</string>
+    <string name="trigger_action_silence">Silence</string>
+    <string name="trigger_action_block">Block</string>
     <string name="trigger_activated">Temporal trigger \'%1$s\' activated</string>
+    <string name="checkbox_exact_word">Search by exact word (if unchecked, any text containing the keyword will be matched).</string>
+    <string name="checkbox_case_sensitive">Case sensitive.</string>
     <string name="btn_activate">Activate</string>
     <string name="affects_label">Affects:</string>
     <string name="groups_colon">Groups: %1$s</string>

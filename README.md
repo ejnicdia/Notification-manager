@@ -9,8 +9,9 @@ Apps can be organized into **Groups**, so a single action can silence or block m
 The app also supports **Triggers**, which are automated rules that activate a silence or block condition based on:
 
 - **Time of day** – a trigger fires every day at a configured hour and minute.
-- **Notification keyword** – a trigger fires when a notification from a specific app or group contains a given keyword.
+- **Notification keyword** – a trigger fires when a notification from a specific app or group contains a given keyword, with advanced options for exact word matching and case sensitivity.
 
+The app is fully localized and supports **English, Spanish, French, and Portuguese**.
 A **persistent notification** keeps you informed while timers are active, and includes a button to deactivate all rules from the notification shade without opening the app.
 
 The entire UI is built with **Jetpack Compose** and follows Material 3 design guidelines.
@@ -19,9 +20,13 @@ The entire UI is built with **Jetpack Compose** and follows Material 3 design gu
 
 ## Version History
 
+### V1.8 – Triggers V3 & UI Polish
+- Triggers based on notifications now include powerful options to toggle **Exact Word Matching** and **Case Sensitivity**, making automation much more precise.
+- Added an improved sleek dropdown menu for language selection, sorted alphabetically for convenience.
+- Resolved minor UI inconsistencies and optimized background tasks for a cleaner experience overall.
+
 ### V1.7 – Multi-Language Support
 - Added language selector in Settings (Spanish, English, French, Portuguese).
-- Default language follows the device system locale, falling back to English.
 - Extracted all hardcoded strings to Android string resources for proper localization.
 - The app fully updates to the selected language immediately.
 
@@ -74,6 +79,6 @@ The entire UI is built with **Jetpack Compose** and follows Material 3 design gu
 
 You can download the latest APK directly from the repository:
 
-**[Download Notification-manager-V1.7](https://github.com/ejnicdia/Notification-manager/blob/main/app/build/outputs/apk/debug/app-debug.apk)**
+**[Download Notification-manager-V1.8.apk](https://github.com/ejnicdia/Notification-manager/blob/main/app/build/outputs/apk/debug/Notification-manager-V1.8.apk)**
 
 > To install the APK on your device, you may need to enable "Install from unknown sources" in your Android settings.

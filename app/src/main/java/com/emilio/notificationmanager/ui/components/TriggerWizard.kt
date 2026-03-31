@@ -46,6 +46,8 @@ fun TriggerWizard(
     var targetHourText by remember { mutableStateOf(initialTrigger?.targetHour?.toString() ?: "") }
     var targetMinuteText by remember { mutableStateOf(initialTrigger?.targetMinute?.toString() ?: "") }
     var keywordText by remember { mutableStateOf(initialTrigger?.keyword ?: "") }
+    var exactWord by remember { mutableStateOf(initialTrigger?.exactWord ?: false) }
+    var caseSensitive by remember { mutableStateOf(initialTrigger?.caseSensitive ?: false) }
     
     // Step 3: Action & Time
     var triggerAction by remember { mutableStateOf(initialTrigger?.action ?: TriggerAction.SILENCE) }
@@ -89,7 +91,9 @@ fun TriggerWizard(
                             type = triggerType, onTypeChange = { triggerType = it },
                             targetHour = targetHourText, onHourChange = { targetHourText = it },
                             targetMinute = targetMinuteText, onMinuteChange = { targetMinuteText = it },
-                            keyword = keywordText, onKeywordChange = { keywordText = it }
+                            keyword = keywordText, onKeywordChange = { keywordText = it },
+                            exactWord = exactWord, onExactWordChange = { exactWord = it },
+                            caseSensitive = caseSensitive, onCaseSensitiveChange = { caseSensitive = it }
                         )
                         3 -> Step3ActionTime(triggerAction, { triggerAction = it }, timeInput, { timeInput = it })
                     }
@@ -125,6 +129,8 @@ fun TriggerWizard(
                                     targetHour = if (triggerType == TriggerType.TEMPORAL) targetHourText.toIntOrNull() else null,
                                     targetMinute = if (triggerType == TriggerType.TEMPORAL) targetMinuteText.toIntOrNull() else null,
                                     keyword = if (triggerType == TriggerType.POR_NOTIFICACION) keywordText else null,
+                                    exactWord = exactWord,
+                                    caseSensitive = caseSensitive,
                                     lastFiredTimestamp = initialTrigger?.lastFiredTimestamp
                                 )
                                 onSave(finalTrigger)
@@ -214,15 +220,25 @@ fun Step1AppsGroups(
                 items(filteredApps, key = { it.packageName }) { app ->
                     val isSelected = selectedPackages.contains(app.packageName)
                     Row(
-                        modifier = Modifier.fillMaxWidth()
-                            .clickable {
-                                if (isSelected) onPackagesChange(selectedPackages - app.packageName)
-                                else onPackagesChange(selectedPackages + app.packageName)
-                            }.padding(vertical = 4.dp),
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Checkbox(checked = isSelected, onCheckedChange = null)
-                        AppListItem(app = app, showDivider = false, onClick = {}, modifier = Modifier.weight(1f))
+                        Checkbox(
+                            checked = isSelected,
+                            onCheckedChange = {
+                                if (isSelected) onPackagesChange(selectedPackages - app.packageName)
+                                else onPackagesChange(selectedPackages + app.packageName)
+                            }
+                        )
+                        AppListItem(
+                            app = app,
+                            showDivider = false,
+                            onClick = {
+                                if (isSelected) onPackagesChange(selectedPackages - app.packageName)
+                                else onPackagesChange(selectedPackages + app.packageName)
+                            },
+                            modifier = Modifier.weight(1f)
+                        )
                     }
                 }
             }
@@ -263,7 +279,11 @@ fun Step2Type(
     targetMinute: String,
     onMinuteChange: (String) -> Unit,
     keyword: String,
-    onKeywordChange: (String) -> Unit
+    onKeywordChange: (String) -> Unit,
+    exactWord: Boolean,
+    onExactWordChange: (Boolean) -> Unit,
+    caseSensitive: Boolean,
+    onCaseSensitiveChange: (Boolean) -> Unit
 ) {
     Column {
         Text(stringResource(R.string.step2_prompt), style = MaterialTheme.typography.labelLarge)
@@ -318,6 +338,15 @@ fun Step2Type(
                 modifier = Modifier.fillMaxWidth().padding(start = 40.dp, top = 8.dp),
                 singleLine = true
             )
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(modifier = Modifier.fillMaxWidth().padding(start = 24.dp).clickable { onExactWordChange(!exactWord) }, verticalAlignment = Alignment.CenterVertically) {
+                Checkbox(checked = exactWord, onCheckedChange = null)
+                Text(stringResource(R.string.checkbox_exact_word), style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(start = 8.dp))
+            }
+            Row(modifier = Modifier.fillMaxWidth().padding(start = 24.dp).clickable { onCaseSensitiveChange(!caseSensitive) }, verticalAlignment = Alignment.CenterVertically) {
+                Checkbox(checked = caseSensitive, onCheckedChange = null)
+                Text(stringResource(R.string.checkbox_case_sensitive), style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(start = 8.dp))
+            }
         }
     }
 }

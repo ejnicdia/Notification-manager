@@ -3,6 +3,7 @@ package com.emilio.notificationmanager.ui.screens
 import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -73,31 +74,48 @@ fun SettingsScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         val languageOptions = listOf(
-            LanguagePreference.SYSTEM to stringResource(R.string.lang_system),
             LanguagePreference.ES to stringResource(R.string.lang_es),
             LanguagePreference.EN to stringResource(R.string.lang_en),
             LanguagePreference.FR to stringResource(R.string.lang_fr),
             LanguagePreference.PT to stringResource(R.string.lang_pt)
-        )
+        ).sortedBy { it.second }
 
-        languageOptions.forEach { (lang, label) ->
-            Row(
+        var expanded by remember { mutableStateOf(false) }
+        val currentLabel = languageOptions.find { it.first == selectedLanguage }?.second ?: stringResource(R.string.lang_system)
+
+        @OptIn(ExperimentalMaterial3Api::class)
+        ExposedDropdownMenuBox(
+            expanded = expanded,
+            onExpandedChange = { expanded = !expanded },
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)
+        ) {
+            OutlinedTextField(
+                value = currentLabel,
+                onValueChange = {},
+                readOnly = true,
+                label = { Text(stringResource(R.string.language_title)) },
+                trailingIcon = {
+                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+                },
                 modifier = Modifier
+                    .menuAnchor()
                     .fillMaxWidth()
-                    .clickable {
-                        selectedLanguage = lang
-                        appPreferences.setLanguagePreference(lang)
-                        onLanguageChange()
-                    }
-                    .padding(vertical = 12.dp, horizontal = 8.dp),
-                verticalAlignment = Alignment.CenterVertically
+            )
+            ExposedDropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false }
             ) {
-                RadioButton(
-                    selected = selectedLanguage == lang,
-                    onClick = null // handled by Row
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(text = label, style = MaterialTheme.typography.bodyLarge)
+                languageOptions.forEach { (lang, label) ->
+                    DropdownMenuItem(
+                        text = { Text(text = label) },
+                        onClick = {
+                            selectedLanguage = lang
+                            appPreferences.setLanguagePreference(lang)
+                            expanded = false
+                            onLanguageChange()
+                        }
+                    )
+                }
             }
         }
 

@@ -31,6 +31,8 @@ data class Trigger(
     var targetHour: Int? = null,
     var targetMinute: Int? = null,
     var keyword: String? = null,
+    var exactWord: Boolean = false,
+    var caseSensitive: Boolean = false,
     var lastFiredTimestamp: Long? = null // Prevents firing the same temporal trigger twice a day
 )
 

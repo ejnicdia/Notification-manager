@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="action_block">Bloquear</string>
+    <string name="action_silence">Silenciar</string>
+    <string name="affects_label">Afecta a:</string>
+    <string name="app_info_title">Información de la aplicación</string>
+    <string name="app_name">Notification Manager</string>
+    <string name="apps_colon">Aplicaciones: %1$s</string>
+    <string name="apps_tap_to_see">%1$d aplicaciones · Toca para ver</string>
+    <string name="blocked_groups_title">Grupos Bloqueados</string>
+    <string name="blocked_individual_title">Aplicaciones Bloqueadas</string>
+    <string name="blocked_min_remaining">Bloqueado (%1$d min restantes)</string>
+    <string name="blocked_remaining_min">%1$d apps • %2$d min restantes</string>
+    <string name="btn_activate">Activar</string>
+    <string name="btn_back">← Atrás</string>
+    <string name="btn_block">Bloquear</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="btn_confirm">Confirmar</string>
+    <string name="btn_confirm_delete">Eliminar</string>
+    <string name="btn_create">Crear</string>
+    <string name="btn_deactivate_all">Desactivar todo</string>
+    <string name="btn_deactivate_rules">Desactivar reglas</string>
+    <string name="btn_delete">Borrar</string>
+    <string name="btn_edit">Editar</string>
+    <string name="btn_enable">Activar</string>
+    <string name="btn_grant_permission">Conceder Permiso</string>
+    <string name="btn_next">Siguiente →</string>
+    <string name="btn_remove">Quitar</string>
+    <string name="btn_save">Guardar</string>
+    <string name="btn_silence">Silenciar</string>
     <string msgid="881409763997275156" name="call_notification_answer_action">"Responder"</string>
     <string msgid="8793775615905189152" name="call_notification_answer_video_action">"Vídeo"</string>
     <string msgid="3229508546291798546" name="call_notification_decline_action">"Rechazar"</string>
@@ -7,13 +35,37 @@
     <string msgid="6107532579223922871" name="call_notification_incoming_text">"Llamada entrante"</string>
     <string msgid="8623827134497363134" name="call_notification_ongoing_text">"Llamada en curso"</string>
     <string msgid="59049573811482460" name="call_notification_screening_text">"Filtrando una llamada entrante"</string>
+    <string name="checkbox_case_sensitive">Diferenciar mayúsculas y minúsculas.</string>
+    <string name="checkbox_exact_word">Buscar por palabra exclusiva (si no se pulsa, cualquier palabra que contenga la palabra clave será aceptada).</string>
     <string msgid="406453423630273620" name="close_drawer">"Cerrar menú de navegación"</string>
     <string msgid="7573152094250666567" name="close_sheet">"Cerrar hoja"</string>
+    <string name="configure_actions">Configurar Acciones</string>
+    <string name="configure_for">Configurar para %1$s</string>
+    <string name="configure_group">Configurar Grupo: %1$s</string>
+    <string name="create_group">Crear Grupo</string>
     <string msgid="8038256446254964252" name="default_error_message">"Entrada no válida"</string>
     <string msgid="6312721426453364202" name="default_popup_window_title">"Ventana emergente"</string>
+    <string name="delete_group_msg">¿Estás seguro de que deseas eliminar el grupo \'%1$s\'? Esto no se puede deshacer.</string>
+    <string name="delete_group_title">Eliminar Grupo</string>
+    <string name="delete_trigger_msg">¿Estás seguro de que deseas eliminar el trigger \'%1$s\'? Esto no se puede deshacer.</string>
+    <string name="delete_trigger_title">Eliminar Trigger</string>
     <string msgid="1890207353314751437" name="dropdown_menu">"Menú desplegable"</string>
+    <string name="group_name_label">Nombre del grupo</string>
+    <string name="groups_colon">Grupos: %1$s</string>
     <string msgid="6827826412747255547" name="in_progress">"En curso"</string>
     <string msgid="7933458017204019916" name="indeterminate">"Marcado parcialmente"</string>
+    <string name="label_duration_min">Duración (minutos)</string>
+    <string name="label_hour_range">Hora (0-23)</string>
+    <string name="label_hours">Horas</string>
+    <string name="label_keyword">Palabra clave requerida</string>
+    <string name="label_minute_range">Minuto (0-59)</string>
+    <string name="label_minutes">Min</string>
+    <string name="lang_en">English</string>
+    <string name="lang_es">Español (Castellano)</string>
+    <string name="lang_fr">Français</string>
+    <string name="lang_pt">Português</string>
+    <string name="lang_system">Por defecto del sistema</string>
+    <string name="language_title">Idioma</string>
     <string msgid="2988463736136100848" name="m3c_bottom_sheet_collapse_description">"Contrae la hoja inferior"</string>
     <string msgid="1555567894577437024" name="m3c_bottom_sheet_dismiss_description">"Cierra la hoja inferior"</string>
     <string msgid="8403354765404029791" name="m3c_bottom_sheet_drag_handle_description">"Controlador de arrastre"</string>
@@ -70,17 +122,70 @@
     <string msgid="6616362054113087709" name="m3c_time_picker_pm">"p. m."</string>
     <string msgid="1805687647081129904" name="m3c_tooltip_long_press_label">"Mostrar descripción emergente"</string>
     <string msgid="5460405025248574620" name="m3c_tooltip_pane_description">"Descripción emergente"</string>
+    <string name="menu_options">Opciones</string>
+    <string name="nav_blocked">Bloqueados</string>
+    <string name="nav_groups">Grupos</string>
+    <string name="nav_home">Inicio</string>
+    <string name="nav_settings">Ajustes</string>
+    <string name="nav_silenced">Silenciados</string>
+    <string name="nav_triggers">Triggers</string>
     <string msgid="542007171693138492" name="navigation_menu">"Menú de navegación"</string>
+    <string name="new_group">Nuevo Grupo</string>
+    <string name="new_trigger">Nuevo Trigger</string>
+    <string name="no_blocked_apps">No hay aplicaciones ni grupos bloqueados</string>
+    <string name="no_groups">No hay grupos creados</string>
+    <string name="no_silenced_apps">No hay aplicaciones ni grupos silenciados</string>
+    <string name="no_triggers">Aún no hay triggers creados.</string>
     <string msgid="6610465462668679431" name="not_selected">"No seleccionado"</string>
+    <string name="notification_warning">Las notificaciones de la app están bloqueadas. El silenciado no funcionará.</string>
     <string msgid="875452955155264703" name="off">"Desactivado"</string>
     <string msgid="8655164131929253426" name="on">"Activado"</string>
+    <string name="permission_needed">Se requiere acceso a las notificaciones para poder bloquearlas.</string>
+    <string name="persistent_text">Hay %1$d apps/grupos con reglas aplicadas.</string>
+    <string name="persistent_title">Notification Manager Activo</string>
     <string msgid="5941395253238309765" name="range_end">"Fin del intervalo"</string>
     <string msgid="7097486360902471446" name="range_start">"Inicio del intervalo"</string>
+    <string name="remaining_min">%1$d apps • %2$d min restantes</string>
+    <string name="remove_app_msg">¿Quitar \'%1$s\' del grupo \'%2$s\'?</string>
+    <string name="remove_app_title">Quitar aplicación</string>
+    <string name="search_app">Buscar aplicación…</string>
     <string msgid="6043586758067023" name="selected">"Seleccionado"</string>
+    <string name="silenced_groups_title">Grupos Silenciados</string>
+    <string name="silenced_individual_title">Aplicaciones Silenciadas</string>
+    <string name="silenced_min_remaining">Silenciado (%1$d min restantes)</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="status_blocked">Bloqueado</string>
+    <string name="status_silenced">Silenciado</string>
+    <string name="step0_label">Nombre (máx 50 char)</string>
+    <string name="step0_prompt">Ponle un nombre a este Trigger:</string>
+    <string name="step1_prompt">Selecciona aplicaciones y/o grupos afectados:</string>
+    <string name="step2_prompt">¿Cómo quieres que se active?</string>
+    <string name="step3_prompt">Definir acción y duración:</string>
     <string msgid="2561197295334830845" name="switch_role">"Interruptor"</string>
     <string msgid="1672349317127674378" name="tab">"Pestaña"</string>
+    <string name="tab_apps">Aplicaciones</string>
+    <string name="tab_groups">Grupos</string>
     <string msgid="5946805113151406391" name="template_percent">"<ns1:g id="PERCENTAGE">%1$d</ns1:g> por cien."</string>
+    <string name="theme_dark">Tema Oscuro (Negro y Azul)</string>
+    <string name="theme_light">Tema Claro (Blanco y Naranja)</string>
+    <string name="theme_system">Tema del Sistema</string>
+    <string name="theme_title">Tema de la aplicación</string>
+    <string name="timer_question">¿Para cuánto tiempo es esta regla?</string>
     <string msgid="3765533235322692011" name="tooltip_description">"descripción emergente"</string>
     <string msgid="3124740595719787496" name="tooltip_label">"mostrar descripción emergente"</string>
+    <string name="trigger_action_block">Bloquear</string>
+    <string name="trigger_action_label">Acción: %1$s</string>
+    <string name="trigger_action_silence">Silenciar</string>
+    <string name="trigger_activated">Trigger temporal \'%1$s\' activado</string>
+    <string name="trigger_condition_keyword">Condición: Palabra clave \'%1$s\'</string>
+    <string name="trigger_condition_time">Condición: A las %1$02d:%2$02d</string>
+    <string name="trigger_time_label">Duración: %1$d minutos</string>
+    <string name="trigger_type_label">Tipo: %1$s</string>
+    <string name="trigger_type_notification">Por Notificación</string>
+    <string name="trigger_type_temporal">Programado</string>
+    <string name="type_notification">Por Notificación (palabra clave)</string>
+    <string name="type_temporal">Programado (a una hora exacta)</string>
+    <string name="unknown_version">Desconocida</string>
+    <string name="version_label">Versión: %1$s</string>
+    <string name="wizard_header">Configurar Trigger (Paso %1$d/4)</string>
 </resources>

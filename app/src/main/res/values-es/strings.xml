@@ -29,14 +29,14 @@
     <!-- Silenced Screen -->
     <string name="no_silenced_apps">No hay aplicaciones ni grupos silenciados</string>
     <string name="silenced_groups_title">Grupos Silenciados</string>
-    <string name="silenced_individual_title">Aplicaciones Silenciadas (Individual)</string>
+    <string name="silenced_individual_title">Aplicaciones Silenciadas</string>
     <string name="remaining_min">%1$d apps • %2$d min restantes</string>
     <string name="btn_remove">Quitar</string>
 
     <!-- Blocked Screen -->
     <string name="no_blocked_apps">No hay aplicaciones ni grupos bloqueados</string>
     <string name="blocked_groups_title">Grupos Bloqueados</string>
-    <string name="blocked_individual_title">Aplicaciones Bloqueadas (Individual)</string>
+    <string name="blocked_individual_title">Aplicaciones Bloqueadas</string>
     <string name="blocked_remaining_min">%1$d apps • %2$d min restantes</string>
 
     <!-- Groups Screen -->
@@ -64,8 +64,16 @@
     <string name="no_triggers">Aún no hay triggers creados.</string>
     <string name="trigger_type_label">Tipo: %1$s</string>
     <string name="trigger_action_label">Acción: %1$s</string>
-    <string name="trigger_time_label">Tiempo: %1$d minutos</string>
+    <string name="trigger_time_label">Duración: %1$d minutos</string>
+    <string name="trigger_condition_time">Condición: A las %1$02d:%2$02d</string>
+    <string name="trigger_condition_keyword">Condición: Palabra clave \'%1$s\'</string>
+    <string name="trigger_type_temporal">Programado</string>
+    <string name="trigger_type_notification">Por Notificación</string>
+    <string name="trigger_action_silence">Silenciar</string>
+    <string name="trigger_action_block">Bloquear</string>
     <string name="trigger_activated">Trigger temporal \'%1$s\' activado</string>
+    <string name="checkbox_exact_word">Buscar por palabra exclusiva (si no se pulsa, cualquier palabra que contenga la palabra clave será aceptada).</string>
+    <string name="checkbox_case_sensitive">Diferenciar mayúsculas y minúsculas.</string>
     <string name="btn_activate">Activar</string>
     <string name="affects_label">Afecta a:</string>
     <string name="groups_colon">Grupos: %1$s</string>

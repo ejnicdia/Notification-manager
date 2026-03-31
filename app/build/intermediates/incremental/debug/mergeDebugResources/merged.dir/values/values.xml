@@ -97,7 +97,35 @@
     <id name="view_tree_view_model_store_owner"/>
     <item name="wrapped_composition_tag" type="id"/>
     <integer name="status_bar_notification_info_maxnum">999</integer>
+    <string name="action_block">Block</string>
+    <string name="action_silence">Silence</string>
+    <string name="affects_label">Affects:</string>
     <string name="androidx_startup" translatable="false">androidx.startup</string>
+    <string name="app_info_title">App information</string>
+    <string name="app_name">Notification Manager</string>
+    <string name="apps_colon">Apps: %1$s</string>
+    <string name="apps_tap_to_see">%1$d apps · Tap to see</string>
+    <string name="blocked_groups_title">Blocked Groups</string>
+    <string name="blocked_individual_title">Blocked Apps</string>
+    <string name="blocked_min_remaining">Blocked (%1$d min remaining)</string>
+    <string name="blocked_remaining_min">%1$d apps • %2$d min remaining</string>
+    <string name="btn_activate">Activate</string>
+    <string name="btn_back">← Back</string>
+    <string name="btn_block">Block</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_confirm">Confirm</string>
+    <string name="btn_confirm_delete">Delete</string>
+    <string name="btn_create">Create</string>
+    <string name="btn_deactivate_all">Deactivate all</string>
+    <string name="btn_deactivate_rules">Deactivate rules</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_edit">Edit</string>
+    <string name="btn_enable">Enable</string>
+    <string name="btn_grant_permission">Grant Permission</string>
+    <string name="btn_next">Next →</string>
+    <string name="btn_remove">Remove</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_silence">Silence</string>
     <string name="call_notification_answer_action">Answer</string>
     <string name="call_notification_answer_video_action">Video</string>
     <string name="call_notification_decline_action">Decline</string>
@@ -105,13 +133,37 @@
     <string name="call_notification_incoming_text">Incoming call</string>
     <string name="call_notification_ongoing_text">Ongoing call</string>
     <string name="call_notification_screening_text">Screening an incoming call</string>
+    <string name="checkbox_case_sensitive">Case sensitive.</string>
+    <string name="checkbox_exact_word">Search by exact word (if unchecked, any text containing the keyword will be matched).</string>
     <string name="close_drawer">"Close navigation menu"</string>
     <string name="close_sheet">"Close sheet"</string>
+    <string name="configure_actions">Configure Actions</string>
+    <string name="configure_for">Configure for %1$s</string>
+    <string name="configure_group">Configure Group: %1$s</string>
+    <string name="create_group">Create Group</string>
     <string name="default_error_message">"Invalid input"</string>
     <string name="default_popup_window_title" ns1:ignore="ExtraTranslation">"Pop-Up Window"</string>
+    <string name="delete_group_msg">Are you sure you want to delete group \'%1$s\'? This cannot be undone.</string>
+    <string name="delete_group_title">Delete Group</string>
+    <string name="delete_trigger_msg">Are you sure you want to delete trigger \'%1$s\'? This cannot be undone.</string>
+    <string name="delete_trigger_title">Delete Trigger</string>
     <string name="dropdown_menu">"Dropdown menu"</string>
+    <string name="group_name_label">Group name</string>
+    <string name="groups_colon">Groups: %1$s</string>
     <string name="in_progress">In progress</string>
     <string name="indeterminate">Partially checked</string>
+    <string name="label_duration_min">Duration (minutes)</string>
+    <string name="label_hour_range">Hour (0-23)</string>
+    <string name="label_hours">Hours</string>
+    <string name="label_keyword">Required keyword</string>
+    <string name="label_minute_range">Minute (0-59)</string>
+    <string name="label_minutes">Min</string>
+    <string name="lang_en">English</string>
+    <string name="lang_es">Español (Castellano)</string>
+    <string name="lang_fr">Français</string>
+    <string name="lang_pt">Português</string>
+    <string name="lang_system">System Default</string>
+    <string name="language_title">Language</string>
     <string name="m3c_bottom_sheet_collapse_description">Collapse bottom sheet</string>
     <string name="m3c_bottom_sheet_dismiss_description">Dismiss bottom sheet</string>
     <string name="m3c_bottom_sheet_drag_handle_description">Drag handle</string>
@@ -172,19 +224,72 @@
     <string name="m3c_time_picker_pm">PM</string>
     <string name="m3c_tooltip_long_press_label">Show tooltip</string>
     <string name="m3c_tooltip_pane_description">Tooltip</string>
+    <string name="menu_options">Options</string>
+    <string name="nav_blocked">Blocked</string>
+    <string name="nav_groups">Groups</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_silenced">Silenced</string>
+    <string name="nav_triggers">Triggers</string>
     <string name="navigation_menu">"Navigation menu"</string>
+    <string name="new_group">New Group</string>
+    <string name="new_trigger">New Trigger</string>
+    <string name="no_blocked_apps">No blocked apps or groups</string>
+    <string name="no_groups">No groups created</string>
+    <string name="no_silenced_apps">No silenced apps or groups</string>
+    <string name="no_triggers">No triggers created yet.</string>
     <string name="not_selected">Not selected</string>
+    <string name="notification_warning">App notifications are blocked. Silencing will not work.</string>
     <string name="off">Off</string>
     <string name="on">On</string>
+    <string name="permission_needed">Notification access is required to block notifications.</string>
+    <string name="persistent_text">There are %1$d apps/groups with applied rules.</string>
+    <string name="persistent_title">Notification Manager Active</string>
     <string name="range_end">"Range end"</string>
     <string name="range_start">"Range start"</string>
+    <string name="remaining_min">%1$d apps • %2$d min remaining</string>
+    <string name="remove_app_msg">Remove \'%1$s\' from group \'%2$s\'?</string>
+    <string name="remove_app_title">Remove app</string>
+    <string name="search_app">Search app…</string>
     <string name="selected">Selected</string>
+    <string name="silenced_groups_title">Silenced Groups</string>
+    <string name="silenced_individual_title">Silenced Apps</string>
+    <string name="silenced_min_remaining">Silenced (%1$d min remaining)</string>
     <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="status_blocked">Blocked</string>
+    <string name="status_silenced">Silenced</string>
+    <string name="step0_label">Name (max 50 char)</string>
+    <string name="step0_prompt">Give this Trigger a name:</string>
+    <string name="step1_prompt">Select affected apps and/or groups:</string>
+    <string name="step2_prompt">How should it activate?</string>
+    <string name="step3_prompt">Set action and duration:</string>
     <string name="switch_role">Switch</string>
     <string name="tab">Tab</string>
+    <string name="tab_apps">Apps</string>
+    <string name="tab_groups">Groups</string>
     <string name="template_percent"><ns2:g id="percentage">%1$d</ns2:g> percent.</string>
+    <string name="theme_dark">Dark Theme (Black and Blue)</string>
+    <string name="theme_light">Light Theme (White and Orange)</string>
+    <string name="theme_system">System Theme</string>
+    <string name="theme_title">App theme</string>
+    <string name="timer_question">How long should this rule last?</string>
     <string name="tooltip_description">tooltip</string>
     <string name="tooltip_label">show tooltip</string>
+    <string name="trigger_action_block">Block</string>
+    <string name="trigger_action_label">Action: %1$s</string>
+    <string name="trigger_action_silence">Silence</string>
+    <string name="trigger_activated">Temporal trigger \'%1$s\' activated</string>
+    <string name="trigger_condition_keyword">Condition: Keyword \'%1$s\'</string>
+    <string name="trigger_condition_time">Condition: At %1$02d:%2$02d</string>
+    <string name="trigger_time_label">Duration: %1$d minutes</string>
+    <string name="trigger_type_label">Type: %1$s</string>
+    <string name="trigger_type_notification">By Notification</string>
+    <string name="trigger_type_temporal">Scheduled</string>
+    <string name="type_notification">By Notification (keyword)</string>
+    <string name="type_temporal">Scheduled (at an exact time)</string>
+    <string name="unknown_version">Unknown</string>
+    <string name="version_label">Version: %1$s</string>
+    <string name="wizard_header">Configure Trigger (Step %1$d/4)</string>
     <style name="DialogWindowTheme">
         <item name="android:windowClipToOutline">false</item>
     </style>
@@ -242,23 +347,14 @@
         <attr format="reference" name="fontProviderCerts"/>
         
         <attr name="fontProviderFetchStrategy">
-            <!-- The blocking font fetch works as follows.
-              First, check the local cache, then if the requested font is not cached, request the
-              font from the provider and wait until it is finished.  You can change the length of
-              the timeout by modifying fontProviderFetchTimeout.  If the timeout happens, the
-              default typeface will be used instead. -->
+            
             <enum name="blocking" value="0"/>
-            <!-- The async font fetch works as follows.
-              First, check the local cache, then if the requeted font is not cached, trigger a
-              request the font and continue with layout inflation. Once the font fetch succeeds, the
-              target text view will be refreshed with the downloaded font data. The
-              fontProviderFetchTimeout will be ignored if async loading is specified. -->
+            
             <enum name="async" value="1"/>
         </attr>
         
         <attr format="integer" name="fontProviderFetchTimeout">
-            <!-- A special value for the timeout. In this case, the blocking font fetching will not
-              timeout and wait until a reply is received from the font provider. -->
+            
             <enum name="forever" value="-1"/>
         </attr>
         
